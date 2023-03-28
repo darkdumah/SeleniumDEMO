@@ -2,6 +2,7 @@ package Selenium.OrangeHRMtestCases;
 
 import Selenium.OrangeHRMtestScenario;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,7 +10,9 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestCases extends OrangeHRMtestScenario{
+class TestCases extends OrangeHRMtestScenario{
+
+
 
     //CREATE NEW ChromeDriver and OPEN BROWSER AT baseURL
     @Test(priority = 1)
@@ -23,7 +26,7 @@ public class TestCases extends OrangeHRMtestScenario{
 
     // CHECK TO SEE IF EXPECTED PAGE TITLE IS ACTUAL TITLE
     @Test(priority = 2)
-    public void testPageTitle() throws InterruptedException {
+    void testPageTitle() throws InterruptedException {
         String expectedTitle = "OrangeHRM";
         String actualTitle = driver.getTitle();
         System.out.println("The title of the application is " + actualTitle);
@@ -33,13 +36,13 @@ public class TestCases extends OrangeHRMtestScenario{
 
     // LOGIN USING USERNAME AND PASSWORD, PRESS LOGIN BUTTON, CHECK IF LOGIN SUCCESSFUL
     @Test(priority = 3)
-    public void loginAction() throws InterruptedException {
+    void loginAction() throws InterruptedException {
         driver.findElement(By.cssSelector("input[placeholder='Username']")).sendKeys("Admin");
         driver.findElement(By.cssSelector("input[placeholder='Password']")).sendKeys("admin123");
         driver.findElement(By.cssSelector("button[type='submit']")).click();
         Thread.sleep(3000);
         String dashboardPage = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
-        if(baseURL == dashboardPage){
+        if(baseURL.equals(dashboardPage)){
             System.out.println("Login failed");
         }else System.out.println("Login Successful");
     }
